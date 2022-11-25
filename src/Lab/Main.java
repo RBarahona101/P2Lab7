@@ -14,11 +14,12 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
         usuarios.add( new Admin ("admin", "password") );
+        usuarios.add( new General ("username", "fifa2022") );
     }
     ArrayList<Usuario> usuarios = new ArrayList();
-
+    ArrayList<Seleccion> equipos = new ArrayList();
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,8 +35,8 @@ public class Main extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Username = new javax.swing.JFormattedTextField();
-        Password = new javax.swing.JPasswordField();
         Login = new javax.swing.JButton();
+        Password = new javax.swing.JFormattedTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,11 +159,11 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(49, 49, 49)
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
+                .addGap(66, 66, 66)
                 .addComponent(Login)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
@@ -184,25 +185,29 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginMouseClicked
+ 
         String us = Username.getText();
         String pa = Password.getText();
+        boolean bonito = false;
         for (int i = 0; i < usuarios.size(); i++){
-            if (us == usuarios.get(i).getUsername() && pa == usuarios.get(i).getPassword() ){
+            if (us.equals(usuarios.get(i).getUsername() ) && pa.equals(usuarios.get(i).getPassword() ) ){
                 if (usuarios.get(i) instanceof Admin){
                     showAdminPanel();
+                    bonito = true;
                 } else if (usuarios.get(i) instanceof General){
-                    
+                    bonito = true;
                 }
-            } else{
-                JOptionPane.showMessageDialog(this, "Este usuario no existe");
             }
+        }
+        if (bonito == false){
+            JOptionPane.showMessageDialog(this, "No existe este usuario");
         }
     }//GEN-LAST:event_LoginMouseClicked
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_LoginActionPerformed
-
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -232,8 +237,10 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
+                
             }
         });
+        
     }
     public void showAdminPanel() {
          AdminPanel.setModal(true);
@@ -241,12 +248,35 @@ public class Main extends javax.swing.JFrame {
          AdminPanel.setLocationRelativeTo(this);
          AdminPanel.setVisible(true);        
     }
+    
+public void escribirEquipos() throws IOException{
+        File archivo = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        String temp = "";
+        for(int i = 0; i < equipos.size(); i++){
+            temp += equipos.get(i).toString() + "\n";
+        } 
+        try{
+            archivo=new File("./Seleccion.txt");
+            fw=new FileWriter(archivo);
+            bw=new BufferedWriter(fw);
+            bw.write(temp);
+            bw.newLine();
+            bw.flush();
 
+        }
+        catch(Exception e){
+            System.out.println("Oops");
+        }
+        bw.close();
+        fw.close();
+    }    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog AdminPanel;
     private javax.swing.JButton Login;
     private javax.swing.JPanel LoginPanel;
-    private javax.swing.JPasswordField Password;
+    private javax.swing.JFormattedTextField Password;
     private javax.swing.JFormattedTextField Username;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
