@@ -85,7 +85,7 @@ public class Seleccion {
         this.jugadores = jugadores;
     }
 
-    public Seleccion(String nombre, int jugados, int ganados, int empatados, int perdidos, int favor, int contra, int diferencia) {
+    public Seleccion(String nombre, int jugados, int ganados, int empatados, int perdidos, int favor, int contra, int diferencia, ArrayList<Jugador> jugadores) {
         this.nombre = nombre;
         this.jugados = jugados;
         this.ganados = ganados;
@@ -94,6 +94,7 @@ public class Seleccion {
         this.favor = favor;
         this.contra = contra;
         this.diferencia = diferencia;
+        this.jugadores= jugadores;
     }
 
     public Seleccion() {
