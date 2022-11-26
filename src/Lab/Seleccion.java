@@ -11,7 +11,7 @@ public class Seleccion {
     protected int favor;
     protected int contra;
     protected int diferencia;
-    protected ArrayList<Jugador> jugadores = new ArrayList();
+    protected ArrayList<Jugador> jugadores;
 
     public String getNombre() {
         return nombre;
@@ -86,7 +86,8 @@ public class Seleccion {
     }
 
     public Seleccion(String nombre, int jugados, int ganados, int empatados, int perdidos, int favor, int contra, int diferencia, ArrayList<Jugador> jugadores) {
-        this.nombre = nombre;
+        this.nombre = nombre; 
+        
         this.jugados = jugados;
         this.ganados = ganados;
         this.empatados = empatados;
@@ -94,15 +95,17 @@ public class Seleccion {
         this.favor = favor;
         this.contra = contra;
         this.diferencia = diferencia;
-        this.jugadores= jugadores;
+        
+        this.jugadores = jugadores;
     }
 
+    
     public Seleccion() {
     }
 
     @Override
     public String toString() {
-        return nombre + "," + jugados + "," + ganados + "," + empatados + "," + perdidos + "," + favor + "," + contra + "," + diferencia + ",";
+        return nombre;
     }
     
     

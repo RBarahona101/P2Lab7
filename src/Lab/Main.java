@@ -630,7 +630,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginMouseClicked
-        
+
         String us = Username.getText();
         String pa = Password.getText();
         boolean bonito = false;
@@ -640,6 +640,7 @@ public class Main extends javax.swing.JFrame {
                     showAdminPanel();
                     bonito = true;
                 } else if (usuarios.get(i) instanceof General){
+                    showGeneralPanel();
                     bonito = true;
                 }
             }
@@ -694,6 +695,7 @@ public class Main extends javax.swing.JFrame {
        Sel = new DefaultComboBoxModel(equipos.toArray());
        Grupo_Seleccion.setModel(Sel);
        Jugador_Grupo.setModel(Sel);
+       
     }//GEN-LAST:event_Seleccion_AgregarMouseClicked
 
     private void Jugador_AgregadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jugador_AgregadorMouseClicked
@@ -719,6 +721,14 @@ public class Main extends javax.swing.JFrame {
             escribirJugadores();
             escribirEquipos();
         }
+        JOptionPane.showMessageDialog(this, "Jugador Creado Exitosamente");
+        ArrayList<Jugador> agh = equipos.get(Jugador_Grupo.getSelectedIndex() ).getJugadores();
+        Jugador_Text.setText("");
+        String temp = "";
+        for (int i = 0; i < agh.size(); i++){
+            temp += agh.get(i) + "\n";
+        }
+        Jugador_Text.setText(temp);
     } catch(Exception e){
         System.out.println("Oops");
     }
@@ -767,7 +777,7 @@ public class Main extends javax.swing.JFrame {
         AdminPanel.setVisible(true);
     }
 
-    public void showGeneraPanel() {
+    public void showGeneralPanel() {
         GeneralPanel.setModal(true);
         GeneralPanel.pack();
         GeneralPanel.setLocationRelativeTo(this);
